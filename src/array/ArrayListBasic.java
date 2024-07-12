@@ -42,7 +42,12 @@ public class ArrayListBasic {
         System.out.println("\nElement of index 0 is: "+ int_list.get(0));
         System.out.println("Element of index 4 is: "+ int_list.get(4));
         System.out.println("\n");
+    }
 
+
+    public static void main(String[] args) {
+        ArrayListBasic al = new ArrayListBasic();
+        al.creating_arraylist();
     }
 }
 

@@ -25,7 +25,12 @@ public class Array2D {
                 System.out.print(array_2d[row][column] + "\t\t\t\t\t");
             }
         }
+    }
 
+
+    public static void main(String[] args) {
+        Array2D instance_array2D = new Array2D();
+        instance_array2D.array_input();
     }
 
 }
