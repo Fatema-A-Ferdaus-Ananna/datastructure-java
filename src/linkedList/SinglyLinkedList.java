@@ -1,7 +1,7 @@
 package linkedList;
 
 public class SinglyLinkedList {
-    private ListNode head;
+    private static ListNode head;
 
     private static class ListNode{
         private int data;
@@ -110,7 +110,32 @@ public class SinglyLinkedList {
         }
     }
 
+    public ListNode reverseSinglyLinkedlist(ListNode head){
+        if(head == null){
+            return head;
+        }
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+        while (current != null){
+            next = current.next;
+            current.next = previous;
+            previous =current;
+            current = next;
+        }
+        return previous;
+    }
+
     public void displaySLL(){
+        ListNode current = head;
+        while (current != null){
+            System.out.print(current.data + " --> ");
+            current = current.next;
+        }
+        System.out.println("Null");
+    }
+
+    public void displaySLLReverse(ListNode head){
         ListNode current = head;
         while (current != null){
             System.out.print(current.data + " --> ");
@@ -160,9 +185,15 @@ public class SinglyLinkedList {
         sll.displaySLL();
         System.out.println("Deleted Value: " +sll.deleteLastNode().data + " .....[Last Node]");
         sll.displaySLL();
-        sll.deleteFromGivenPosition(1, sll.length());
-        sll.displaySLL();
-        sll.deleteFromGivenPosition(2, sll.length());
+//        sll.deleteFromGivenPosition(1, sll.length());
+//        sll.displaySLL();
+//        sll.deleteFromGivenPosition(2, sll.length());
+//        sll.displaySLL();
+
+        ListNode reversedSLL = sll.reverseSinglyLinkedlist(head); // it retruns reversed head node
+        System.out.print("Aftre Reverse: ");
+//        sll.displaySLLReverse(reversedSLL);
+        sll.head = reversedSLL; // updating the head of sll instance
         sll.displaySLL();
     }
 }
