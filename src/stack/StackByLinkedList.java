@@ -48,7 +48,7 @@ public class StackByLinkedList {
         return popValue;
     }
 
-    public int pick(){
+    public int peek(){
         if(isEmpty()){
             throw new EmptyStackException();
         }
@@ -75,7 +75,7 @@ public class StackByLinkedList {
         stackLL.displaySLL();
         System.out.println("Is Stack Empty:  " + stackLL.isEmpty());
         System.out.println("Pop Value:  " + stackLL.pop());
-        System.out.println("Pick Value:  " + stackLL.pick());
+        System.out.println("Pick Value:  " + stackLL.peek());
 
     }
 }
