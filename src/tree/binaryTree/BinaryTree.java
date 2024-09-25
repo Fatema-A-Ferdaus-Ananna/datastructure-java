@@ -1,5 +1,7 @@
 package tree.binaryTree;
 
+import java.util.Stack;
+
 public class BinaryTree {
     private  TreeNode root;
     private int nodeNum;
@@ -58,19 +60,109 @@ public class BinaryTree {
         preOrder(root.rightNode);
     }
 
-    public void inOrder(TreeNode root){ //left subtree --> r --> right subtree
+    public void preOrderIterative(TreeNode root){
+        if(root == null){
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            TreeNode temp = stack.pop();
+            System.out.print(temp.data + "  ");
 
+            if(temp.rightNode != null){
+                stack.push(temp.rightNode);
+            }
+            if(temp.leftNode != null){
+                stack.push(temp.leftNode);
+            }
+        }
+    }
+
+    public void inOrder(TreeNode root){ //left subtree --> r --> right subtree
+        if(root == null){
+            return;
+        }
+        inOrder(root.leftNode);
+        System.out.print(root.data + "  ");
+        inOrder(root.rightNode);
+    }
+
+    public void inOrderIterative(TreeNode root){
+        if(root == null){
+            return;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode temp = root;
+        while (!stack.isEmpty() || temp != null){
+            if(temp != null){
+                stack.push(temp);
+                temp = temp.leftNode;
+            } else {
+                temp = stack.pop();
+                System.out.print(temp.data + "  ");
+                temp = temp.rightNode;
+            }
+        }
     }
 
     public void postOrder(TreeNode root){ //left subtree --> right subtree --> r
-
+        if(root == null){
+            return;
+        }
+        postOrder(root.leftNode);
+        postOrder(root.rightNode);
+        System.out.print(root.data + "  ");
     }
+
+    public void postOrderIterative(TreeNode root){
+        if(root == null){
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        while (!stack.isEmpty() || current != null){
+            if(current != null){
+                stack.push(current);
+                current = current.leftNode;
+            }else {
+                TreeNode temp = stack.peek().rightNode;
+                if(temp == null){
+                    temp = stack.pop();
+                    System.out.print(temp.data + "  ");
+                    while (!stack.isEmpty() && temp == stack.peek().rightNode){
+                        temp = stack.pop();
+                        System.out.print(temp.data + "  ");
+                    }
+                }else {
+                    current = temp;
+                }
+            }
+        }
+    }
+
     public static void main(String[] agrs){
         System.out.println("Binary Tree");
         BinaryTree bt = new BinaryTree();
         bt.createBinaryTree();
         System.out.print("Pre-order: ");
         bt.preOrder(bt.root);
+        System.out.println(" ");
+        System.out.print("In-order: ");
+        bt.inOrder(bt.root);
+        System.out.println(" ");
+        System.out.print("Post-order: ");
+        bt.postOrder(bt.root);
+        System.out.println("\n");
+        System.out.print("Pre-order Iterative: ");
+        bt.preOrderIterative(bt.root);
+        System.out.println(" ");
+        System.out.print("In-order Iterative: ");
+        bt.inOrderIterative(bt.root);
+        System.out.println(" ");
+        System.out.print("Post-order: ");
+        bt.postOrderIterative(bt.root);
 
     }
 }
